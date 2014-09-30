@@ -1,0 +1,10 @@
+{
+    "name": "realtyhub/invoice-painter-bundle",
+    "description": "Symfony2 Bundle to help render PDF Invoices",
+    "require": {
+        "php":                      ">=5.3.3",
+        "symfony/framework-bundle": "~2.3",
+        "symfony/twig-bundle":      "~2.3",
+        "slik/dompdf-bundle":       "dev-master"
+    }
+}
