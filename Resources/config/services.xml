@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="realtyhub_invoice_painter.controller.class">Realtyhub\InvoicePainterBundle\Controller\IndexController</parameter>
+        <parameter key="realtyhub_invoice_painter.twig.extension.class">Realtyhub\InvoicePainterBundle\Twig\RealtyhubInvoicePainterExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="realtyhub_invoice_painter" class="%realtyhub_invoice_painter.controller.class%" >
+            <argument type="service" id="templating" />
+            <argument type="service" id="slik_dompdf" />
+            <argument>%realtyhub_invoice_painter.tax_short_name%</argument>
+        </service>
+
+        <service id="realtyhub_invoice_painter.twig.extension" class="%realtyhub_invoice_painter.twig.extension.class%">
+            <argument>%realtyhub_invoice_painter.currency_symbol%</argument>
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>
+
+

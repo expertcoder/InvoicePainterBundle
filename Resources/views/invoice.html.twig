@@ -1,0 +1,139 @@
+<html>
+<head>
+    <style>
+        body
+        {
+            font-family: Helvetica;
+            font-size: 12px;
+        }
+
+        td
+        {
+            padding-top: 3px;
+            padding-bottom: 3px;
+            vertical-align: top;
+
+        }
+
+        .right
+        {
+            text-align: right;
+        }
+
+        .large
+        {
+            font-size: 30px;
+        }
+
+        td.underline-bold
+        {
+            border-bottom: 2px solid #666;
+        }
+
+        td.underline
+        {
+            border-bottom: 1px solid #666;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<table style="width: 100%;" cellspacing="0"  >
+
+    <tr>
+        <td colspan="8" class="right">
+            {#<img src="{{ logoPath }}" />#}
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="3" >
+            <div class="large" >Tax Invoice</div><br />
+
+            {% for clientNameLine in invoiceData.clientNameLines %}
+                {{ clientNameLine }}<br />
+            {% endfor %}
+            {% for clientAddressLine in invoiceData.clientAddressLines %}
+                {{ clientAddressLine }}<br />
+            {% endfor %}
+        </td>
+        <td colspan="2"><b>Invoice Date:</b><br />
+            {{ invoiceData.invoiceDate|date('d/m/Y') }}<br />
+            <br />
+            <b>Invoice No:</b><br />
+            {{ invoiceData.invoiceNumber }}<br />
+            <br />
+            <b>{{ invoiceData.taxShortName }} Number</b><br />
+            {{ invoiceData.taxNumber }}<br />
+        </td>
+        <td></td>
+        <td colspan="2">
+            {% for companyNameLine in invoiceData.companyNameLines %}
+                {{ companyNameLine }}<br />
+            {% endfor %}
+            {% for companyAddressLine in invoiceData.companyAddressLines %}
+                {{ companyAddressLine }}<br />
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr >
+        <td class="underline-bold" ><b>Date</b></td>
+        <td colspan="4" class="underline-bold" ><b>Description</b></td>
+        <td class="right underline-bold" ><b>Unit Price</b></td>
+        <td class="right underline-bold" ><b>{{ invoiceData.taxShortName }}</b></td>
+        <td class="right underline-bold" ><b>Amount</b></td>
+    </tr>
+    <tr>
+        <td colspan="8" ></td>
+    </tr>
+
+    {% for invoiceItem in invoiceData.invoiceItems %}
+    <tr>
+        <td>{{ invoiceItem.date|date('d/m/Y') }}</td>
+        <td colspan="4" >{{ invoiceItem.description }}</td>
+        <td class="right" >{{ invoiceItem.amountEx|money }}</td>
+        <td class="right" >{{ invoiceItem.taxRate|percentage }}</td>
+        <td class="right" >{{ invoiceItem.amountInc|money }}</td>
+
+    </tr>
+    {% endfor %}
+    <tr >
+        <td colspan="8" class="underline" ></td>
+    </tr>
+    <tr>
+        <td colspan="8" ></td>
+    </tr>
+    <tr>
+        <td colspan="5" >&nbsp;</td>
+        <td colspan="2" class="right" >Subtotal</td>
+        <td class="right">{{ invoiceData.totalAmountEx|money }}</td>
+    </tr>
+    <tr>
+        <td colspan="5" >&nbsp;</td>
+        <td colspan="2" class="right underline-bold" >TOTAL {{ invoiceData.taxShortName }}</td>
+        <td class="right underline-bold">{{ invoiceData.totalTax|money }}</td>
+    </tr>
+    <tr>
+        <td colspan="5" ></td>
+        <td colspan="3" ></td>
+    </tr>
+    <tr>
+        <td colspan="5" >&nbsp;</td>
+        <td colspan="2" class="right" >TOTAL AMOUNT</td>
+        <td class="right">{{ invoiceData.totalAmountInc|money }}</td>
+    </tr>
+
+</table>
+
+
+</body>
+</html>
+
