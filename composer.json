@@ -1,10 +1,23 @@
 {
     "name": "realtyhub/invoice-painter-bundle",
+    "type": "symfony-bundle",
     "description": "Symfony2 Bundle to help render PDF Invoices",
+    "homepage": "https://github.com/realtyhub/InvoicePainterBundle",
+    "authors": [
+        {
+            "name": "Samual Anthony",
+            "email": "sam@realtyhub.com.au"
+        }
+    ],
     "require": {
         "php":                      ">=5.3.3",
         "symfony/framework-bundle": "~2.3",
         "symfony/twig-bundle":      "~2.3",
         "slik/dompdf-bundle":       "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Realtyhub\\InvoicePainterBundle": ""
+        }
     }
 }
