@@ -16,8 +16,6 @@
         "slik/dompdf-bundle":       "dev-master"
     },
     "autoload": {
-        "psr-0": {
-            "Realtyhub\\InvoicePainterBundle": ""
-        }
+        "psr-4": { "Realtyhub\\InvoicePainterBundle": "" }
     }
 }
