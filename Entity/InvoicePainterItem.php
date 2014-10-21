@@ -28,6 +28,18 @@ class InvoicePainterItem
         return $obj;
     }
 
+    static public function createFromInterface(InvoicePainterItemInterface $invoicePainterItemInterface)
+    {
+        $obj = new self;
+
+        $obj->setAmountEx($invoicePainterItemInterface->getInvoicePainterAmountEx());
+        $obj->setTaxRate($invoicePainterItemInterface->getInvoicePainterTaxRate());
+        $obj->setDescription($invoicePainterItemInterface->getInvoicePainterDescription());
+        $obj->setDate($invoicePainterItemInterface->getInvoicePainterDate());
+
+        return $obj;
+    }
+
 
     /**
      * @param mixed $amountEx
