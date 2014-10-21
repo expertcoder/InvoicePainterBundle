@@ -69,7 +69,7 @@ class InvoicePainterDataContainer
      */
     public function addCompanyAddressLine($companyAddressLine)
     {
-        $this->companyAddressLine[] = $companyAddressLine;
+        $this->companyAddressLines[] = $companyAddressLine;
     }
 
     /**
@@ -85,7 +85,7 @@ class InvoicePainterDataContainer
      */
     public function addCompanyNameLine($companyNameLine)
     {
-        $this->companyNameLine[] = $companyNameLine;
+        $this->companyNameLines[] = $companyNameLine;
     }
 
     /**
