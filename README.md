@@ -86,10 +86,81 @@ class DefaultController extends Controller
 
 ```
 
-# TODOs
+###Alternative technique using InvoicePainterItemInterface
 
-* Set some default values for config.yml.
-* in config.yml, force the currency symbol to be a valid option.
+You may already have an entity that directly relates to an invoice item. For example, your entity
+may already contain the Sale price, the tax rate, description and sale date.
+
+In this case you can make this entity implement InvoicePainterItemInterface
+ 
+```
+//Some entity file
+use Realtyhub\InvoicePainterBundle\Entity\InvoicePainterItemInterface;
+
+/**
+ * @ORM\Table(name="sales_history")
+ * @ORM\Entity()
+ */
+class SalesHistory implements InvoicePainterItemInterface
+{
+
+    /**
+     * @ORM\Column(name="description", type="string", length=255)
+     */
+    private $description;
+    
+    /**
+     * @ORM\Column(name="sale_at", type="datetime")
+     */
+    private $saleAt;
+    
+    /**
+     * @ORM\Column(name="price_ex_tax", type="float")
+     */
+    private $priceExTax;
+    
+    /**
+     * @ORM\Column(name="tax_rate", type="float")
+     */
+    private $taxRate;
+    
+    //Implement methods from InvoicePainterItemInterface
+    public function getInvoicePainterAmountEx()
+    {
+         return $this->priceExTax;
+    }
+
+    public function getInvoicePainterTaxRate()
+    {
+         return $this->taxRate;
+    }
+
+    public function getInvoicePainterDate()
+    {
+         return $this->saleAt;
+    }
+   
+    public function getInvoicePainterDescription()
+    {
+         return $this->description;
+    }
+
+```
+
+```
+//changes required in the controller action
+
+
+$salesHistory = $salesHistoryRepository->findAll();
+
+foreach ($salesHistory as $sale)
+{
+    // $sale will be instance of SalesHistory 
+    $invoiceData->addInvoiceItem( InvoicePainterItem::createFromInterface($sale) ); //instead of $invoiceData->addInvoiceItem( InvoicePainterItem::createFromParams(1499, 0.2, 'Dell Laptop', new \DateTime() ) );
+}
+
+```
+
 
 
 
