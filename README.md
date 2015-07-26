@@ -26,7 +26,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new FOS\UserBundle\FOSUserBundle(),
+        new Realtyhub\InvoicePainterBundle\RealtyhubInvoicePainterBundle(),
     );
 }
 ```
