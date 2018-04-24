@@ -1,3 +1,5 @@
+![Freelance Banner](https://s3.eu-central-1.amazonaws.com/static.expertcoder.io/github-banner/banner.png)
+
 # Invoice Painter Bundle
 
 This Symfony2 bundle has the simple purpose of helping your application generate PDF invoices.
